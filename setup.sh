@@ -25,7 +25,7 @@ add-apt-repository \
     $(lsb_release -cs) \
     stable"
 apt-get update
-apt-get install -y docker-ce
+apt-get install -y docker-ce docker-compose
 
 #install awscli with pip to get the latest
 echo "Installing AWSCLI..."
