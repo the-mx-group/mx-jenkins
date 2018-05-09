@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export DEBIAN_FRONTEND=noninteractive
+
 echo "Script setup.sh updating apt and installing build tools..."
 apt-get update
 
@@ -36,7 +38,16 @@ echo "Installing JQ..."
 #install commandline json parser
 apt-get install -y jq
 
+echo "Installing git LFS..."
+
+# Install git lfs extension
+# from https://github.com/MarkEWaite/docker-lfs/blob/lts-with-plugins/Dockerfile
+curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash 
+apt-get install -y --allow-unauthenticated --no-install-recommends git-lfs
+git lfs install
+
 echo "Cleaning up..."
 apt-get clean
+rm -r /var/lib/apt/lists/*
 
 echo "Done with setup.sh"
