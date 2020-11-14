@@ -39,12 +39,17 @@ echo "Installing JQ..."
 apt-get install -y jq
 
 echo "Installing git LFS..."
-
 # Install git lfs extension
 # from https://github.com/MarkEWaite/docker-lfs/blob/lts-with-plugins/Dockerfile
 curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash 
 apt-get install -y --allow-unauthenticated --no-install-recommends git-lfs
 git lfs install
+
+echo "Installing kubernetes tools..."
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+sudo apt-get install -y kubectl
 
 echo "Cleaning up..."
 apt-get clean
