@@ -31,7 +31,7 @@ apt-get install -y docker-ce docker-compose
 
 #install awscli with pip to get the latest
 echo "Installing AWSCLI..."
-apt-get install -y python-pip
+apt-get install -y python3-pip
 pip install awscli
 
 echo "Installing JQ..."
