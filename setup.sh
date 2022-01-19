@@ -51,6 +51,9 @@ echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/s
 apt-get update
 apt-get install -y kubectl
 
+echo "Installing rsync..."
+apt-get install -y rsync
+
 echo "Cleaning up..."
 apt-get clean
 rm -r /var/lib/apt/lists/*
