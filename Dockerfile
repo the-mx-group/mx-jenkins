@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:2.361.3-lts
+FROM jenkins/jenkins:2.361.4-lts
 
 ARG user=jenkins
 
