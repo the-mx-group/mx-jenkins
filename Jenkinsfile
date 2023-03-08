@@ -16,13 +16,12 @@ node('docker && linux') {
 		println "Detected Jenkins version: ${jenkins_version}"
 	}
     stage ('Build docker image') {
-        app = docker.build("themxgroup/mx-jenkins:latest")
-        app_tag = docker.build("themxgroup/mx-jenkins:${jenkins_version}")
+        app = docker.build("themxgroup/jenkins:latest")
     }
     stage ('Push build to dockerhub') {
         docker.withRegistry("", "bf000207-a578-4e38-95b3-8bee5458155b") {
-            app.push()
-            app_tag.push()
+            app.push('latest')
+            app_tag.push(jenkins_version)
         }
     }
 }
