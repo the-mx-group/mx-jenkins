@@ -21,7 +21,7 @@ node('docker && linux') {
     stage ('Push build to dockerhub') {
         docker.withRegistry("", "bf000207-a578-4e38-95b3-8bee5458155b") {
             app.push('latest')
-            app_tag.push(jenkins_version)
+            app.push(jenkins_version)
         }
     }
 }
