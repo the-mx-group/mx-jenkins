@@ -31,8 +31,7 @@ apt-get install -y docker-ce docker-compose
 
 #install awscli with pip to get the latest
 echo "Installing AWSCLI..."
-apt-get install -y python3-pip
-pip install awscli
+apt-get install -y awscli
 
 echo "Installing JQ..."
 #install commandline json parser
