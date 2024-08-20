@@ -1,0 +1,5 @@
+plugins:
+  - artifactId: docker-workflow
+  - artifactId: cloudbees-bitbucket-branch-source
+    source:
+      version: 886.v44cf5e4ecec5
