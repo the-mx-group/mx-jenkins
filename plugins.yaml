@@ -1,5 +1,44 @@
 plugins:
-  - artifactId: docker-workflow
+  - artifactId: audit-trail
+  - artifactId: aws-credentials
+  - artifactId: aws-lambda
   - artifactId: cloudbees-bitbucket-branch-source
     source:
       version: 886.v44cf5e4ecec5
+  - artifactId: blueocean
+  - artifactId: build-pipeline-plugin
+  - artifactId: build-timeout
+  - artifactId: configuration-as-code
+  - artifactId: content-replace
+  - artifactId: dark-theme
+  - artifactId: docker-workflow
+  - artifactId: ec2
+  - artifactId: email-ext
+  - artifactId: envinject
+  - artifactId: extended-read-permission
+  - artifactId: git-parameter
+  - artifactId: github-branch-source
+  - artifactId: google-chat-notification
+  - artifactId: google-login
+  - artifactId: google-oauth-plugin
+  - artifactId: http_request
+  - artifactId: mask-passwords
+  - artifactId: matrix-auth
+  - artifactId: msbuild
+  - artifactId: multibranch-scan-webhook-trigger
+  - artifactId: newrelic-deployment-notifier
+  - artifactId: workflow-aggregator
+  - artifactId: pipeline-graph-view
+  - artifactId: pipeline-utility-steps
+  - artifactId: pipeline-aws
+  - artifactId: pipeline-stage-view
+  - artifactId: PrioritySorter
+  - artifactId: role-strategy
+  - artifactId: schedule-build
+  - artifactId: slack
+  - artifactId: ssh-slaves
+  - artifactId: test-results-analyzer
+  - artifactId: timestamper
+  - artifactId: warnings-ng
+  - artifactId: ws-cleanup
+
