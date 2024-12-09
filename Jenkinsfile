@@ -1,11 +1,11 @@
 parallel([
     amd64: {
-        node('mx && docker && linux && amd64') {
+        node('mx-devops && docker && linux && amd64') {
             build("amd64")
         }
     },
     arm64: {
-        node('mx && docker && linux && arm64') {
+        node('mx-devops && docker && linux && arm64') {
             build("arm64")
         }
     }
