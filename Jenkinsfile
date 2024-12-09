@@ -1,11 +1,15 @@
-parallel {
-    node('mx && docker && linux && amd64') {
-        build("amd64")
+parallel([
+    amd64: {
+        node('mx && docker && linux && amd64') {
+            build("amd64")
+        }
+    },
+    arm64: {
+        node('mx && docker && linux && arm64') {
+            build("arm64")
+        }
     }
-    node('mx && docker && linux && arm64') {
-        build("arm64")
-    }
-}
+])
 
 def build(platform) {
     def commit_id
