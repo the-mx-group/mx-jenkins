@@ -1,4 +1,7 @@
+def registry = "bf000207-a578-4e38-95b3-8bee5458155b"
 def tags = []
+def jenkins_version
+
 parallel([
     amd64: {
         node('mx-devops && docker && linux && amd64') {
@@ -12,11 +15,11 @@ parallel([
     }
 ])
 
-// TODO: use tags to build a combined cross-platform manifest 
+// use tags to build a combined cross-platform manifest 
+make_manifest(jenkins_version, tags)
 
 def build(platform) {
     def commit_id
-    def jenkins_version
     def app, app_tag
 
     stage("${platform}: Checkout"){
@@ -34,9 +37,21 @@ def build(platform) {
         app = docker.build("themxgroup/jenkins:latest")
     }
     stage ("${platform}: Push build to dockerhub") {
-        docker.withRegistry("", "bf000207-a578-4e38-95b3-8bee5458155b") {
+        docker.withRegistry("", registry) {
+            app_tag = "${jenkins_version}-${platform}"
             app.push("latest-${platform}")
-            app.push("${jenkins_version}-${platform}")
+            app.push(app_tag)
+        }
+    }
+    return app_tag
+}
+
+def make_manifest(version, tags) {
+    node('mx-devops && docker && linux && arm64') {
+        stage("Create manifest") {
+            sh "docker buildx imagetools create -t themxgroup/jenkins:${version} ${tags.join(' ')}"
+            sh "docker buildx imagetools create -t themxgroup/jenkins:latest ${tags.join(' ')}"
+            // sh "docker manifest push themxgroup/jenkins:${version}"
         }
     }
 }
