@@ -1,7 +1,7 @@
 def config = [
-    registry: "bf000207-a578-4e38-95b3-8bee5458155b"
-    jenkins_version: ""
-    tags: []
+    registry: "bf000207-a578-4e38-95b3-8bee5458155b",
+    jenkins_version: "",
+    tags: [],
 ]
 
 parallel([
