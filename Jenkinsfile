@@ -1,5 +1,5 @@
 def config = [
-    registry: "bf000207-a578-4e38-95b3-8bee5458155b",
+    registryCredential: "bf000207-a578-4e38-95b3-8bee5458155b",
     jenkins_version: "",
     tags: [],
 ]
@@ -39,7 +39,7 @@ def build(platform, config) {
         app = docker.build("themxgroup/jenkins:latest")
     }
     stage ("${platform}: Push build to dockerhub") {
-        docker.withRegistry("", registry) {
+        docker.withRegistry("", config.registryCredential) {
             app_tag = "${config.jenkins_version}-${platform}"
             app.push("latest-${platform}")
             app.push(app_tag)
@@ -51,9 +51,11 @@ def build(platform, config) {
 def make_manifest(config) {
     node('mx-devops && docker && linux && arm64') {
         stage("Create manifest") {
-            sh "docker buildx imagetools create -t themxgroup/jenkins:${config.jenkins_version} ${config.tags.join(' ')}"
-            sh "docker buildx imagetools create -t themxgroup/jenkins:latest ${config.tags.join(' ')}"
-            // sh "docker manifest push themxgroup/jenkins:${config.jenkins_version}"
+            docker.withRegistry("", config.registryCredential) {
+                sh "docker buildx imagetools create -t themxgroup/jenkins:${config.jenkins_version} ${config.tags.join(' ')}"
+                sh "docker buildx imagetools create -t themxgroup/jenkins:latest ${config.tags.join(' ')}"
+                // sh "docker manifest push themxgroup/jenkins:${config.jenkins_version}"
+            }
         }
     }
 }
