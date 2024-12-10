@@ -7,12 +7,12 @@ def config = [
 parallel([
     amd64: {
         node('mx-devops && docker && linux && amd64') {
-            tags.push(build("amd64", config))
+            build("amd64", config)
         }
     },
     arm64: {
         node('mx-devops && docker && linux && arm64') {
-            tags.push(build("arm64", config))
+            build("arm64", config)
         }
     }
 ])
