@@ -1,15 +1,18 @@
+def tags = []
 parallel([
     amd64: {
         node('mx-devops && docker && linux && amd64') {
-            build("amd64")
+            tags.push(build("amd64"))
         }
     },
     arm64: {
         node('mx-devops && docker && linux && arm64') {
-            build("arm64")
+            tags.push(build("arm64"))
         }
     }
 ])
+
+// TODO: use tags to build a combined cross-platform manifest 
 
 def build(platform) {
     def commit_id
@@ -32,8 +35,8 @@ def build(platform) {
     }
     stage ("${platform}: Push build to dockerhub") {
         docker.withRegistry("", "bf000207-a578-4e38-95b3-8bee5458155b") {
-            app.push('latest')
-            app.push(jenkins_version)
+            app.push("latest-${platform}")
+            app.push("${jenkins_version}-${platform}")
         }
     }
 }
