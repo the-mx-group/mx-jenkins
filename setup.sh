@@ -20,11 +20,9 @@ apt-get install -y \
     curl \
     gnupg2 \
     software-properties-common
-curl -fsSL https://download.docker.com/linux/debian/gpg > /tmp/docker-gpg-key
-gpg --no-default-keyring --keyring /tmp/docker.gpg /tmp/docker-gpg-key | grep "9DC858229FC7DD38854AE2D88D81803C0EBFCD88" || (echo "Docker key has invalid fingerprint!" && exit -1)
-cat /tmp/docker-gpg-key | apt-key add -
-add-apt-repository \
-    "deb [arch=amd64] https://download.docker.com/linux/debian \
+#curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker.gpg
+add-apt-repository -y \
+    "deb [arch=$(dpkg --print-architecture)] https://download.docker.com/linux/debian \
     $(lsb_release -cs) \
     stable"
 apt-get update
