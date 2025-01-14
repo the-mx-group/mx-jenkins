@@ -20,11 +20,8 @@ apt-get install -y \
     curl \
     gnupg2 \
     software-properties-common
-#curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker.gpg
-add-apt-repository -y \
-    "deb [arch=$(dpkg --print-architecture)] https://download.docker.com/linux/debian \
-    $(lsb_release -cs) \
-    stable"
+curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
 apt-get update
 apt-get install -y docker-ce docker-compose
 
@@ -42,17 +39,6 @@ echo "Installing git LFS..."
 curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash 
 apt-get install -y --allow-unauthenticated --no-install-recommends git-lfs
 git lfs install
-
-# TODO: can we remove this since jobs are run on external agents
-echo "Installing kubernetes tools..."
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
-echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list
-apt-get update
-apt-get install -y kubectl=1.23.6-00
-
-# TODO: can we remove this since jobs are run on external agents
-echo "Installing rsync..."
-apt-get install -y rsync
 
 echo "Cleaning up..."
 apt-get clean
