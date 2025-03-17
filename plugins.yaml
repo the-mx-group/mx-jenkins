@@ -6,6 +6,8 @@ plugins:
     source:
       version: 886.v44cf5e4ecec5
   - artifactId: blueocean
+    source:
+      version: 1.27.16
   - artifactId: build-pipeline-plugin
   - artifactId: build-timeout
   - artifactId: configuration-as-code
