@@ -2,6 +2,7 @@ plugins:
   - artifactId: audit-trail
   - artifactId: aws-credentials
   - artifactId: aws-lambda
+  - artifactId: aws-secrets-manager-credentials-provider
   - artifactId: cloudbees-bitbucket-branch-source
   - artifactId: blueocean
   - artifactId: blueocean-bitbucket-pipeline
