@@ -1,3 +1,7 @@
+# Local smoke test: boots the controller against a CasC directory.
+#   CASC_DIR=../mx-devops.terraform/jenkins-casc docker compose up --build
+# Env vars referenced by the config (${...}) that you don't provide are left unresolved, so
+# expect warnings about credentials unless you supply them.
 services:
   jenkins:
     build:
@@ -6,3 +10,9 @@ services:
     restart: unless-stopped
     ports:
       - "8080:8080"
+    environment:
+      CASC_JENKINS_CONFIG: /casc
+      JENKINS_PUBLIC_URL: http://localhost:8080/
+      JAVA_OPTS: -Djenkins.install.runSetupWizard=false
+    volumes:
+      - ${CASC_DIR:-./casc}:/casc:ro
