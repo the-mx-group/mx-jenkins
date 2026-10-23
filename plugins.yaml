@@ -22,6 +22,7 @@ plugins:
   - artifactId: google-login
   - artifactId: google-oauth-plugin
   - artifactId: http_request
+  - artifactId: job-dsl
   - artifactId: mask-passwords
   - artifactId: matrix-auth
   - artifactId: msbuild
