@@ -4,8 +4,6 @@ plugins:
   - artifactId: aws-lambda
   - artifactId: aws-secrets-manager-credentials-provider
   - artifactId: cloudbees-bitbucket-branch-source
-  - artifactId: blueocean
-  - artifactId: blueocean-bitbucket-pipeline
   - artifactId: build-pipeline-plugin
   - artifactId: build-timeout
   - artifactId: configuration-as-code
@@ -23,6 +21,7 @@ plugins:
   - artifactId: google-oauth-plugin
   - artifactId: http_request
   - artifactId: job-dsl
+  - artifactId: kubernetes-cli
   - artifactId: mask-passwords
   - artifactId: matrix-auth
   - artifactId: msbuild
